@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Birthday Cake</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&display=swap" rel="stylesheet">
+
+<audio id="music" loop>
+  <source src="The Beatles - Birthday - JC (youtube).mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="document.getElementById('music').play()">
+Play Music
+</button>
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="birthdayText"></div>
+
+<div class="cake-container" id="cakeContainer">
+<div class="cake pixelart-to-css"></div>
+</div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search)
+
+let candleCount = parseInt(params.get("candles")) || 4
+candleCount = Math.min(Math.max(candleCount,1),30)
+
+const birthdayText = document.getElementById("birthdayText")
+
+birthdayText.innerHTML = `
+<div id="mainTitle">Happy Birthday, Rhesty Basudara!</div>
+<div id="subTitle">Make a wish...</div>
+`
+
+const cakeContainer = document.getElementById("cakeContainer")
+
+const colors = [
+"green-candle",
+"purple-candle",
+"blue-candle",
+"yellow-candle"
+]
+
+function createCandles(count){
+
+const candlesPerRow = 6
+
+for(let i=0;i<count;i++){
+
+const candle = document.createElement("div")
+
+candle.classList.add("candle")
+
+const colorClass = colors[Math.floor(Math.random()*colors.length)]
+candle.classList.add(colorClass)
+
+const row = Math.floor(i / candlesPerRow)
+const col = i % candlesPerRow
+
+
+cakeContainer.appendChild(candle)
+
+}
+
+}
+
+createCandles(candleCount)
+
+</script>
+
+</body>
+</html>
